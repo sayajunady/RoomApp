@@ -28,14 +28,38 @@ class EditorActivity : AppCompatActivity() {
 
         database = AppDatabase.getInstance(applicationContext)
 
+        var intent = intent.extras
+        if(intent!=null){
+            var user = database.userDao().get(intent.getInt("id"))
+
+            fullName.setText(user.fullName)
+            email.setText(user.email)
+            phone.setText(user.phone)
+        }
+
         btnSimpan.setOnClickListener( {
             if (fullName.text.length > 0 && email.text.length > 0 && phone.text.length > 0) {
-                database.userDao().insertAll(User(
-                    null,
-                    fullName.text.toString(),
-                    email.text.toString(),
-                    phone.text.toString()
-                ))
+                if(intent!=null){
+                    //code edit data
+                    database.userDao().update(
+                        User(
+                            intent.getInt("id",0),
+                            fullName.text.toString(),
+                            email.text.toString(),
+                            phone.text.toString()
+                    ))
+                } else {
+                    //code tambah data
+                    database.userDao().insertAll(
+                        User(
+                            null,
+                            fullName.text.toString(),
+                            email.text.toString(),
+                            phone.text.toString()
+                        )
+                    )
+                }
+                    finish()
 
             } else {
                 Toast.makeText(applicationContext, "Silahkan isi data dengan benar",

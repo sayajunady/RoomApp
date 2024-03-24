@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">RoomApp</string>
+    <string-array name="item_option">
+        <item>Ubah</item>
+        <item>Hapus</item>
+        <item>Batal</item>
+    </string-array>
 </resources>
