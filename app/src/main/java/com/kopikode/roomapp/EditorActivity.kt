@@ -15,6 +15,7 @@ class EditorActivity : AppCompatActivity() {
     private lateinit var fullName: EditText
     private lateinit var email: EditText
     private lateinit var phone:EditText
+    private lateinit var address: EditText
     private lateinit var btnSimpan:Button
     private lateinit var database: AppDatabase
 
@@ -24,6 +25,8 @@ class EditorActivity : AppCompatActivity() {
         fullName = findViewById(R.id.full_name)
         email = findViewById(R.id.email)
         phone = findViewById(R.id.phone)
+        address = findViewById(R.id.address)
+
         btnSimpan = findViewById(R.id.btnSimpan)
 
         database = AppDatabase.getInstance(applicationContext)
@@ -35,10 +38,11 @@ class EditorActivity : AppCompatActivity() {
             fullName.setText(user.fullName)
             email.setText(user.email)
             phone.setText(user.phone)
+            address.setText(user.address)
         }
 
         btnSimpan.setOnClickListener( {
-            if (fullName.text.length > 0 && email.text.length > 0 && phone.text.length > 0) {
+            if (fullName.text.length > 0 && email.text.length > 0 && phone.text.length > 0 ) {
                 if(intent!=null){
                     //code edit data
                     database.userDao().update(
@@ -46,7 +50,8 @@ class EditorActivity : AppCompatActivity() {
                             intent.getInt("id",0),
                             fullName.text.toString(),
                             email.text.toString(),
-                            phone.text.toString()
+                            phone.text.toString(),
+                            address.text.toString()
                     ))
                 } else {
                     //code tambah data
@@ -55,7 +60,8 @@ class EditorActivity : AppCompatActivity() {
                             null,
                             fullName.text.toString(),
                             email.text.toString(),
-                            phone.text.toString()
+                            phone.text.toString(),
+                            address.text.toString()
                         )
                     )
                 }

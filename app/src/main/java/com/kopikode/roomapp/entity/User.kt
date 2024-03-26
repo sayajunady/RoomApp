@@ -9,5 +9,6 @@ class User (
     @PrimaryKey(autoGenerate = true) var uid: Int? = null,
     @ColumnInfo(name = "full_name") var fullName: String?,
     @ColumnInfo(name = "email") var email: String?,
-    @ColumnInfo(name = "phone") var phone: String?
+    @ColumnInfo(name = "phone") var phone: String?,
+    @ColumnInfo(name = "address") var address: String?
 )
